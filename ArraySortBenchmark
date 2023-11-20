@@ -1,0 +1,78 @@
+ackage Comp;
+//Bryce Sheffield
+import java.util.Arrays;
+
+public class ArraySortBenchmark {
+
+    public static void main(String[] args) {
+        
+        // Define an array of input sizes (i.e., sizes of arrays to be sorted).
+        int[] inputSizes = {50000, 100000, 150000, 200000, 250000, 300000};
+
+        System.out.println("Input Size | Execution Time (ms)");
+
+        System.out.println("---------------------------------");
+
+        // Iterate through the input sizes using a for loop.
+        for (int size : inputSizes) {
+            // Generate a random array of integers with the specified size.
+            int[] array = ArrayUtilities.generateRandomArray(size);
+
+            // Record the current time as the start time.
+            long startTime = System.currentTimeMillis();
+
+            // Sort the array using the Arrays.sort() method.
+            Arrays.sort(array);
+
+            // Record the current time as the end time.
+            long endTime = System.currentTimeMillis();
+
+            // Calculate the execution time by subtracting the start time from the end time.
+            long executionTime = endTime - startTime;
+
+            // Print the input size and execution time in a formatted table.
+            System.out.printf("%9d | %18d%n", size, executionTime);
+        }
+
+        System.out.println("---------------------------------");
+
+        // Create an array of 10 random integers.
+        int[] unorderedIntArray = ArrayUtilities.generateRandomArray(10);
+
+        // Print the contents of the unordered integer array.
+        System.out.println("Unordered Integer Array: " + Arrays.toString(unorderedIntArray));
+
+        // Check if the array is ordered in ascending order.
+        boolean isOrderedAscending = ArrayUtilities.ordered(unorderedIntArray);
+
+        // Print whether the array is ordered in ascending order.
+        System.out.println("Is the array ordered in ascending order? " + isOrderedAscending);
+
+        // If the array is not ordered in ascending order it'll sort it in ascending order.
+        if (!isOrderedAscending) {
+            ArrayUtilities.bsort(unorderedIntArray);
+
+            // Print the sorted array.
+            System.out.println("Sorted in ascending order: " + Arrays.toString(unorderedIntArray));
+        }
+
+        // Create an array of 10 random double values.
+        double[] unorderedDoubleArray = ArrayUtilities.generateRandomDoubleArray(10);
+
+        // Print the contents of the unordered double array.
+        System.out.println("Unordered Double Array: " + Arrays.toString(unorderedDoubleArray));
+
+        // Check if the array is ordered in descending order.
+        boolean isOrderedDescending = ArrayUtilities.ordered(unorderedDoubleArray, false);
+
+        System.out.println("Is the array ordered in descending order? " + isOrderedDescending);
+
+        // If the array is not ordered in descending order sort it in descending order.
+        if (!isOrderedDescending) {
+            ArrayUtilities.bsort(unorderedDoubleArray, false);
+
+            // Print the sorted array.
+            System.out.println("Sorted in descending order: " + Arrays.toString(unorderedDoubleArray));
+        }
+    }
+}
